@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { getRecipe } from '../../services/recipeService';
 import { Recipe } from '../../types/Recipe';
 
@@ -27,11 +27,11 @@ const RecipeDetails: React.FC = () => {
 
     return (
         <div>
-            <h1>{recipe.title}</h1>
+            <h1>{recipe.title}</h1> <Link to={`/edit-recipe/${recipe.id}`}><button>Edytuj</button></Link>
             <p>{recipe.author}</p>
             <p>{recipe.ingredients}</p>
             <p>{recipe.instructions}</p>
-
+            <Link to={`/`}><button>Back</button></Link>
         </div>
     );
 };

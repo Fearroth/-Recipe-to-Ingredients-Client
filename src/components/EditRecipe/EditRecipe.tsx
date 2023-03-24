@@ -1,9 +1,10 @@
 // src/components/EditRecipe/EditRecipe.tsx
 
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Recipe } from '../../types/Recipe';
 import { getRecipe, updateRecipe } from '../../services/recipeService';
+import DeleteRecipe from '../DeleteRecipe/DeleteRecipe';
 
 const EditRecipe: React.FC = () => {
     const [title, setTitle] = useState('');
@@ -69,6 +70,11 @@ const EditRecipe: React.FC = () => {
                 ></textarea>
             </label>
             <button type="submit">Update Recipe</button>
+            <br />
+            <br />
+            <Link to={`/`}><button>Index</button></Link>
+            <Link to={`/recipes/${id}`}><button>Back</button></Link>
+            <Link to={`/recipes/${id}/delete`}><button>DELETE</button></Link>
         </form>
     );
 };
