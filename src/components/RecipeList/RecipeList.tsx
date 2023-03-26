@@ -20,8 +20,9 @@ const RecipeList: React.FC = () => {
 
     return (
         <div>
-            <Link to={`recipes/create-recipe/`}>Dodaj przepis</Link>
+
             <h1>Recipes</h1>
+            <Link to={`recipes/create-recipe/`}>Add New Recipe</Link>
             <ul>
                 {recipes.map((recipe) => (
                     <RecipeListItem key={recipe.id} recipe={recipe} />

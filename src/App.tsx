@@ -5,7 +5,7 @@ import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 import RecipeForm from './components/RecipeForm/RecipeForm';
 import EditRecipe from './components/EditRecipe/EditRecipe';
 import DeleteRecipe from './components/DeleteRecipe/DeleteRecipe';
-
+import AdminPanel from './components/AdminPanel/AdminPanel';
 import './App.scss';
 
 const App: React.FC = () => {
@@ -17,6 +17,8 @@ const App: React.FC = () => {
         <Route path="/recipes/create-recipe" element={<RecipeForm />} />
         <Route path="/recipes/edit-recipe/:id" element={<EditRecipe />} />
         <Route path="/recipes/:id/delete" element={<DeleteRecipe />} />
+
+        <Route path="/admin" element={<AdminPanel />}></Route>
       </Routes>
     </Router>
   );
