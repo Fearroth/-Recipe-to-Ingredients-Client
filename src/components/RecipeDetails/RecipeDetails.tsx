@@ -27,7 +27,7 @@ const RecipeDetails: React.FC = () => {
 
     return (
         <div>
-            <h1>{recipe.title}</h1> <Link to={`/edit-recipe/${recipe.id}`}><button>Edytuj</button></Link>
+            <h1>{recipe.title}</h1> <Link to={`/recipes/edit-recipe/${recipe.id}`}><button>Edytuj</button></Link>
             <p>{recipe.author}</p>
             <p>{recipe.ingredients}</p>
             <p>{recipe.instructions}</p>

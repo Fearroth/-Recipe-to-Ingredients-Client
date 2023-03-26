@@ -6,14 +6,16 @@ import RecipeForm from './components/RecipeForm/RecipeForm';
 import EditRecipe from './components/EditRecipe/EditRecipe';
 import DeleteRecipe from './components/DeleteRecipe/DeleteRecipe';
 
+import './App.scss';
+
 const App: React.FC = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<RecipeList />} />
         <Route path="/recipes/:id" element={<RecipeDetails />} />
-        <Route path="/create-recipe" element={<RecipeForm />} />
-        <Route path="/edit-recipe/:id" element={<EditRecipe></EditRecipe>} />
+        <Route path="/recipes/create-recipe" element={<RecipeForm />} />
+        <Route path="/recipes/edit-recipe/:id" element={<EditRecipe />} />
         <Route path="/recipes/:id/delete" element={<DeleteRecipe />} />
       </Routes>
     </Router>

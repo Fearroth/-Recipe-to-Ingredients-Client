@@ -16,6 +16,7 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ onSubmit }) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         await createRecipe({ title, author, ingredients, instructions });
+       
         if (onSubmit) {
             onSubmit();
         }
@@ -34,21 +35,22 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ onSubmit }) => {
                 />
             </label>
             <label>
-                Description:
-                <textarea
+                Author:
+                <input
+                    type="text"
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
-                ></textarea>
+                ></input>
             </label>
             <label>
-                Description:
+                Ingredients:
                 <textarea
                     value={ingredients}
                     onChange={(e) => setIngredients(e.target.value)}
                 ></textarea>
             </label>
             <label>
-                Description:
+                Instructions:
                 <textarea
                     value={instructions}
                     onChange={(e) => setinstructions(e.target.value)}

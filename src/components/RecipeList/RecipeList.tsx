@@ -20,7 +20,7 @@ const RecipeList: React.FC = () => {
 
     return (
         <div>
-            <Link to={`/create-recipe/`}>Dodaj przepis</Link>
+            <Link to={`recipes/create-recipe/`}>Dodaj przepis</Link>
             <h1>Recipes</h1>
             <ul>
                 {recipes.map((recipe) => (
