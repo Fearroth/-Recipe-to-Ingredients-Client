@@ -12,6 +12,8 @@ import AdminPanel from './components/AdminPanel/AdminPanel';
 
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import './App.scss';
+import ErrorPage from './components/ErrorPage/ErrorPage';
+import LoginPage from './components/LoginPage/LoginPage';
 
 const App: React.FC = () => {
   return (
@@ -27,6 +29,8 @@ const App: React.FC = () => {
           <Route path="/admin" element={<PrivateRoute />}>
             <Route path="" element={<AdminPanel />} />
           </Route>
+          <Route path="/access-denied" element={<ErrorPage />} />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Router>
     </AuthProvider>
