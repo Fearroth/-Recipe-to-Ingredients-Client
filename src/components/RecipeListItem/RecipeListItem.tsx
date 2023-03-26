@@ -1,5 +1,3 @@
-// src/components/RecipeItem/RecipeItem.tsx
-
 import React from 'react';
 import { Recipe } from '../../types/Recipe';
 import { Link } from 'react-router-dom';

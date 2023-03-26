@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { deleteRecipe } from '../../services/recipeService';
@@ -23,7 +21,7 @@ const DeleteRecipe: React.FC = () => {
         <div>
             <h1>Are you sure you want to delete this recipe?</h1>
             <button onClick={handleDelete}>Yes, delete</button>
-            <button onClick={() => navigate(`recipes/edit-recipe/${id}`)}>No, go back</button>
+            <button onClick={() => navigate(`/recipes/edit-recipe/${id}`)}>No, go back</button>
         </div>
     );
 };
