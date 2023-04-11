@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 
 import RecipeList from './components/RecipeList/RecipeList';
@@ -31,6 +31,7 @@ const App: React.FC = () => {
           </Route>
           <Route path="/access-denied" element={<ErrorPage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </AuthProvider>

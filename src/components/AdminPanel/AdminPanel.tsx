@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { getAllRecipes } from '../../services/recipeService'
+import { getRecipes } from '../../services/recipeService'
 import { Recipe } from '../../types/Recipe';
 import { User } from '../../types/User';
 
@@ -11,7 +11,7 @@ const AdminPanel: React.FC = () => {
 
     useEffect(() => {
         const fetchRecipesAndUsers = async () => {
-            const recipesData = await getAllRecipes();
+            const recipesData = await getRecipes();
             const UsersData = []//await getAllUsers(); TUTAJ PLACEHOLDER
             setReicpes(recipesData)
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getAllRecipes } from '../../services/recipeService';
+import { getRecipesFront } from '../../services/recipeService';
 import { Recipe } from '../../types/Recipe';
 import RecipeListItem from '../RecipeListItem/RecipeListItem';
 import { useAuth } from '../../contexts/AuthContext';
@@ -11,7 +11,7 @@ const RecipeList: React.FC = () => {
 
     useEffect(() => {
         const fetchRecipes = async () => {
-            const data = await getAllRecipes();
+            const data = await getRecipesFront();
             setRecipes(data);
         };
 
