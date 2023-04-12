@@ -2,7 +2,7 @@ import React from 'react';
 import { Outlet, Navigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
-const PrivateRoute: React.FC = () => {
+const AdminPrivateRoute: React.FC = () => {
     const { isAuthenticated, isAdmin } = useAuth();
 
     if (!isAuthenticated) {
@@ -18,4 +18,4 @@ const PrivateRoute: React.FC = () => {
     return <Outlet />;
 };
 
-export default PrivateRoute;
+export default AdminPrivateRoute;
