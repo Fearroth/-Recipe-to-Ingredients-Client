@@ -14,27 +14,31 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import './App.scss';
 import ErrorPage from './components/ErrorPage/ErrorPage';
 import LoginPage from './components/LoginPage/LoginPage';
-
+import { CookiesProvider } from 'react-cookie';
+import UserPage from './components/UserPage/UserPage';
 const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<RecipeList />} />
-          <Route path="/recipes/:id" element={<RecipeDetails />} />
-          <Route path="/recipes/create-recipe" element={<RecipeForm />} />
-          <Route path="/recipes/edit-recipe/:id" element={<EditRecipe />} />
-          <Route path="/recipes/:id/delete" element={<DeleteRecipe />} />
+    <CookiesProvider>
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<RecipeList />} />
+            <Route path="/recipes/:id" element={<RecipeDetails />} />
+            <Route path="/recipes/create-recipe" element={<RecipeForm />} />
+            <Route path="/recipes/edit-recipe/:id" element={<EditRecipe />} />
+            <Route path="/recipes/:id/delete" element={<DeleteRecipe />} />
 
-          <Route path="/admin" element={<PrivateRoute />}>
-            <Route path="" element={<AdminPanel />} />
-          </Route>
-          <Route path="/access-denied" element={<ErrorPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </Router>
-    </AuthProvider>
+            <Route path="/admin" element={<PrivateRoute />}>
+              <Route path="" element={<AdminPanel />} />
+            </Route>
+            <Route path="/access-denied" element={<ErrorPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="*" element={<Navigate to="/" />} />
+            <Route path="/user/:id" element={<UserPage />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </CookiesProvider>
   );
 };
 

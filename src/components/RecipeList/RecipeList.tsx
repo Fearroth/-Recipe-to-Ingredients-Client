@@ -7,7 +7,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 const RecipeList: React.FC = () => {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
-    const { isAuthenticated, isAdmin, setIsAuthenticated, setIsAdmin } = useAuth();
+    const { userId, isAuthenticated, isAdmin, setIsAuthenticated, setIsAdmin, logout } = useAuth();
 
     useEffect(() => {
         const fetchRecipes = async () => {
@@ -18,6 +18,7 @@ const RecipeList: React.FC = () => {
         fetchRecipes();
     }, []);
 
+    //filler
     const loginAs = (user: 'admin' | 'user' | 'out') => {
         switch (user) {
             case 'admin':
@@ -36,18 +37,28 @@ const RecipeList: React.FC = () => {
                 return;
         }
     };
-
+    const handleLogout = async () => {
+        await logout();
+    };
     return (
         <div>
             <div>
                 <button onClick={() => loginAs('admin')}>Login as Admin</button>
                 <button onClick={() => loginAs('user')}>Login as User</button>
-                <button onClick={() => loginAs('out')}>Logout</button>
+                <button onClick={() => handleLogout()}>Logout</button>
                 {isAuthenticated && isAdmin && (
                     <Link to="/admin">
                         <button>Go to Admin Panel</button>
                     </Link>
                 )}
+                {isAuthenticated && (
+                    <Link to={`/user/${userId}`}>
+                        <button>User Page</button>
+                    </Link>
+                )}
+                <Link to="/login">
+                    <button>Login</button>
+                </Link>
             </div>
             <p>{`Logged in: ${isAuthenticated.toString()}`}</p>
             <p>{`Admin: ${isAdmin.toString()}`}</p>
@@ -58,7 +69,7 @@ const RecipeList: React.FC = () => {
                     <RecipeListItem key={recipe.id} recipe={recipe} />
                 ))}
             </ul>
-        </div>
+        </div >
     );
 };
 
