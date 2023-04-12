@@ -12,7 +12,7 @@ import UserPage from './components/UserPage/UserPage';
 
 import DeleteRecipe from './components/DeleteRecipe/DeleteRecipe';
 import EditRecipe from './components/EditRecipe/EditRecipe';
-import RecipeList from './components/RecipeList/RecipeList';
+import HeroPage from './components/HeroPage/HeroPage';
 import RecipeDetails from './components/RecipeDetails/RecipeDetails';
 import RecipeForm from './components/RecipeForm/RecipeForm';
 
@@ -26,7 +26,7 @@ const App: React.FC = () => {
       <AuthProvider>
         <Router>
           <Routes>
-            <Route path="/" element={<RecipeList />} />
+            <Route path="/" element={<HeroPage />} />
 
             {/* private route for authenticated users? */}
             <Route path="/recipes/:id" element={<RecipeDetails />} />

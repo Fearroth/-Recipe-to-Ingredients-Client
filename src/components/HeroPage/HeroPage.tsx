@@ -4,6 +4,7 @@ import { getRecipesFront } from '../../services/recipeService';
 import { Recipe } from '../../types/Recipe';
 import RecipeListItem from '../RecipeListItem/RecipeListItem';
 import { useAuth } from '../../contexts/AuthContext';
+import RecipeListModule from '../../modules/RecipeListModule';
 
 const RecipeList: React.FC = () => {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -62,15 +63,19 @@ const RecipeList: React.FC = () => {
             </div>
             <p>{`Logged in: ${isAuthenticated.toString()}`}</p>
             <p>{`Admin: ${isAdmin.toString()}`}</p>
-            <h1>Recipes</h1>
-            <Link to={`recipes/create-recipe/`}>Add New Recipe</Link>
-            <ul>
-                {recipes.map((recipe) => (
-                    <RecipeListItem key={recipe.id} recipe={recipe} />
-                ))}
-            </ul>
+
+            <RecipeListModule recipes={recipes} />
         </div >
     );
 };
 
 export default RecipeList;
+
+//old recipelist
+{/* <h1>Recipes</h1>
+            <Link to={`recipes/create-recipe/`}>Add New Recipe</Link>
+            <ul>
+                {recipes.map((recipe) => (
+                    <RecipeListItem key={recipe.id} recipe={recipe} />
+                ))}
+            </ul> */}

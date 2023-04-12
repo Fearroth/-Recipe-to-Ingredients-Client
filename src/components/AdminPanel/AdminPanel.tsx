@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import RecipeListModule from '../../modules/RecipeListModule';
 import { getRecipes } from '../../services/recipeService'
 import { Recipe } from '../../types/Recipe';
 import { User } from '../../types/User';
@@ -24,17 +25,7 @@ const AdminPanel: React.FC = () => {
             <h1>Admin Panel</h1>
             <Link to='/'>Index</Link>
             <div>
-                <h2>Recipes</h2>
-                <Link to="/create-recipe">Add New Recipe</Link>
-                <ul>
-                    {recipes.map((recipe) => (
-                        <li key={recipe.id}>
-                            <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
-                            <Link to={`/recipes/edit-recipe/${recipe.id}`}>Edit</Link>
-                            <Link to={`/recipes/${recipe.id}/delete`}>Delete</Link>
-                        </li>
-                    ))}
-                </ul>
+                <RecipeListModule recipes={recipes} showAddNew showEdit showDelete />
             </div>
 
             <div>
@@ -56,3 +47,16 @@ const AdminPanel: React.FC = () => {
 };
 
 export default AdminPanel;
+
+// <RecipeList recipes={recipes} showAddNew showEdit showDelete />
+// <h2>Recipes</h2>
+// <Link to="/create-recipe">Add New Recipe</Link>
+// <ul>
+//     {recipes.map((recipe) => (
+//         <li key={recipe.id}>
+//             <Link to={`/recipes/${recipe.id}`}>{recipe.title}</Link>
+//             <Link to={`/recipes/edit-recipe/${recipe.id}`}>Edit</Link>
+//             <Link to={`/recipes/${recipe.id}/delete`}>Delete</Link>
+//         </li>
+//     ))}
+// </ul>
