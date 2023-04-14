@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getRecipesFront } from '../../services/recipeService';
 import { Recipe } from '../../types/Recipe';
-import RecipeListItem from '../RecipeListItem/RecipeListItem';
+import RecipeListItem from '../../modules/RecipeListItem/RecipeListItem';
 import { useAuth } from '../../contexts/AuthContext';
-import RecipeListModule from '../../modules/RecipeListModule';
+import RecipeListModule from '../../modules/RecipeList/RecipeListModule';
 
 const RecipeList: React.FC = () => {
     const [recipes, setRecipes] = useState<Recipe[]>([]);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import RecipeListModule from '../../modules/RecipeListModule';
+import RecipeListModule from '../../modules/RecipeList/RecipeListModule';
 import { getRecipes } from '../../services/recipeService'
 import { Recipe } from '../../types/Recipe';
 import { User } from '../../types/User';

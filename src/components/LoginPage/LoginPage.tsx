@@ -4,6 +4,7 @@ import { loginUser } from '../../services/loginService';
 import { useAuth } from '../../contexts/AuthContext';
 import { useCookies } from 'react-cookie';
 
+import './LoginPage.scss'
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -29,34 +30,39 @@ const LoginPage: React.FC = () => {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <form onSubmit={onSubmit}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        value={email}
-                        onChange={(event) => setEmail(event.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        required
-                        value={password}
-                        onChange={(event) => setPassword(event.target.value)}
-                    />
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            <Link to="/">Back to Home</Link>
+        <div className='login-page'>
+            <div className='header'>
+
+                <h1 className='header-title'>Login</h1>
+            </div>
+            <div className='body'>
+                <form className='body-form' onSubmit={onSubmit}>
+                    <div className='body-form-item'>
+                        <label className='body-form-item-label' htmlFor="email">Email:</label>
+                        <input className='body-form-item-input'
+                            type="email"
+                            id="email"
+                            name="email"
+                            required
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
+                        />
+                    </div>
+                    <div className='body-form-item'>
+                        <label className='body-form-item-label' htmlFor="password">Password:</label>
+                        <input className='body-form-item-input'
+                            type="password"
+                            id="password"
+                            name="password"
+                            required
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                        />
+                    </div>
+                    <button className='body-form-button' type="submit">Login</button>
+                </form>
+                <Link className='body-link' to="/">Back to Home</Link>
+            </div >
         </div>
     );
 };
