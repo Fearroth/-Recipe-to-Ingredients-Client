@@ -1,5 +1,6 @@
 
 import api from './api';
+
 import { Recipe } from '../types/Recipe';
 import { ApiResources } from '../types/ApiResources';
 import { Endpoints } from '../types/Endpoints';
@@ -9,6 +10,7 @@ export const getRecipes = async (): Promise<Recipe[]> => {
     const response = await api.get(Endpoints.Recpipes);
     return response.data[ApiResources.Recpipes];
 };
+
 
 export const getAllRecipes = async (): Promise<Recipe[]> => {
     const response = await api.get('/recipes/all');
@@ -28,11 +30,13 @@ export const createRecipe = async (recipe: Recipe): Promise<Recipe> => {
 export const updateRecipe = async (id: number, recipe: Recipe): Promise<Recipe> => {
     const response = await api.put(`/recipes/${id}`, recipe);
     return response.data;
+
 };
 
 export const deleteRecipe = async (id: number): Promise<void> => {
     await api.delete(`/recipes/${id}`);
 };
+
 
 export const restoreRecipe = async (id: number): Promise<Recipe> => {
     const response = await api.put(`/recipes/${id}/restore`);

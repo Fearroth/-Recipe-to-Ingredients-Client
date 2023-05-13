@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createRecipe } from '../../services/recipeService';
+import { Recipe, Product, createRecipeType } from '../../types/Recipe';
 
 interface RecipeFormProps {
     onSubmit?: () => void;
@@ -8,15 +9,23 @@ interface RecipeFormProps {
 
 const RecipeForm: React.FC<RecipeFormProps> = ({ onSubmit }) => {
     const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
-    const [ingredients, setIngredients] = useState('');
-    const [instructions, setinstructions] = useState('');
+    const [authorId, setAuthorId] = useState<number | null>(null);
+    const [instructions, setInstructions] = useState('');
+    const [products, setProducts] = useState<Product[]>([]);
     const navigate = useNavigate();
+
+
+    const handleProductChange = (index: number, field: keyof Product, value: any) => {
+        const updatedProducts = [...products];
+        updatedProducts[index] = { ...updatedProducts[index], [field]: value };
+        setProducts(updatedProducts);
+    };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        await createRecipe({ title, author, ingredients, instructions });
-       
+        const newRecipe: createRecipeType = { title, authorId, products, instructions };
+        await createRecipe(newRecipe);
+
         if (onSubmit) {
             onSubmit();
         }
@@ -37,23 +46,28 @@ const RecipeForm: React.FC<RecipeFormProps> = ({ onSubmit }) => {
             <label>
                 Author:
                 <input
-                    type="text"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
+                    type="number"
+                    value={authorId || ''}
+                    onChange={(e) => setAuthorId(e.target.value ? parseInt(e.target.value, 10) : null)}
                 ></input>
             </label>
-            <label>
-                Ingredients:
-                <textarea
-                    value={ingredients}
-                    onChange={(e) => setIngredients(e.target.value)}
-                ></textarea>
-            </label>
+            {products.map((product, index) => (
+                <div key={index}>
+                    <label>
+                        Product Name:
+                        <input
+                            type="text"
+                            value={product.name}
+                            onChange={(e) => handleProductChange(index, 'name', e.target.value)}
+                        />
+                    </label>
+                </div>
+            ))}
             <label>
                 Instructions:
                 <textarea
                     value={instructions}
-                    onChange={(e) => setinstructions(e.target.value)}
+                    onChange={(e) => setInstructions(e.target.value)}
                 ></textarea>
             </label>
             <button type="submit">Create Recipe</button>

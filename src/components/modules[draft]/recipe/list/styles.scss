@@ -1,0 +1,28 @@
+.modules-recipes-list {
+    position: relative;
+
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .header-link {
+            color: red;
+            font-size: 2em;
+        }
+
+        .heder-title {
+            color: black;
+            font-size: 3em;
+        }
+    }
+
+    .body {
+        .list {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+}
