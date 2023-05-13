@@ -2,37 +2,57 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { Recipe } from '../../types/Recipe';
+import { Recipe, Product, ProductQuantityUnit, updateRecipeType } from '../../types/Recipe';
 import { getRecipe, updateRecipe } from '../../services/recipeService';
 import DeleteRecipe from '../DeleteRecipe/DeleteRecipe';
+import { useAuth } from '../../contexts/AuthContext';
 
 const EditRecipe: React.FC = () => {
+    const [recipeId, setRecipeId] = useState<string>('');
     const [title, setTitle] = useState('');
-    const [author, setAuthor] = useState('');
-    const [ingredients, setIngredients] = useState('');
+    const [authorId, setAuthorId] = useState<number | null>(null);
+    const [authorName, setAuthorName] = useState<string>('');
     const [instructions, setInstructions] = useState('');
+    const [products, setProducts] = useState<Product[]>([]);
 
     const { id } = useParams();
     const navigate = useNavigate();
+    const { userId } = useAuth();
+
+
 
     useEffect(() => {
         const fetchRecipe = async () => {
             if (id) {
                 const recipe = await getRecipe(parseInt(id, 10));
+                console.log(recipe)
+                setRecipeId(recipe.id);
                 setTitle(recipe.title);
-                setAuthor(recipe.author);
-                setIngredients(recipe.ingredients);
+                setAuthorId(recipe.author?.id || null);
+                setAuthorName(recipe.author?.name || '');
                 setInstructions(recipe.instructions);
+                setProducts(recipe.products)
             }
         };
 
         fetchRecipe();
     }, [id]);
 
+    const handleProductChange = (index: number, field: keyof Product | keyof ProductQuantityUnit, value: any) => {
+        const updatedProducts = [...products];
+        if (field === 'quantity' || field === 'unit') {
+            updatedProducts[index] = { ...updatedProducts[index], products: { ...updatedProducts[index].products, [field]: value } };
+        } else {
+            updatedProducts[index] = { ...updatedProducts[index], [field]: value };
+        }
+        setProducts(updatedProducts);
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (id) {
-            await updateRecipe(parseInt(id, 10), { title, author, ingredients, instructions });
+            const updatedRecipe: updateRecipeType = { id, title, authorId, products, instructions };
+            await updateRecipe(parseInt(id, 10), updatedRecipe);
             navigate('/');
         };
     };
@@ -49,19 +69,37 @@ const EditRecipe: React.FC = () => {
             </label>
             <label>
                 Author:
-                <input
-                    type="text"
-                    value={author}
-                    onChange={(e) => setAuthor(e.target.value)}
-                />
+                <p>{authorName}</p>
             </label>
-            <label>
-                Ingredients:
-                <textarea
-                    value={ingredients}
-                    onChange={(e) => setIngredients(e.target.value)}
-                ></textarea>
-            </label>
+            {products.map((product, index) => (
+                <div key={index}>
+                    <label>
+                        Product Name:
+                        <input
+                            type="text"
+                            value={product.name}
+                            onChange={(e) => handleProductChange(index, 'name', e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        Quantity:
+                        <input
+                            type="text"
+                            value={product.products?.quantity}
+                            onChange={(e) => handleProductChange(index, 'quantity', e.target.value)}
+                        />
+                    </label>
+                    <label>
+                        Unit:
+                        <input
+                            type="text"
+                            value={product.products?.unit}
+                            onChange={(e) => handleProductChange(index, 'unit', e.target.value)}
+                        />
+                    </label>
+                </div>
+            ))}
+
             <label>
                 Instructions:
                 <textarea
